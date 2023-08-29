@@ -6,6 +6,9 @@ import com.studentcrm.demoproject.repo.CourseRepo;
 import com.studentcrm.demoproject.repo.StudentRepo;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -41,5 +44,9 @@ public class StudentService {
         courses.add(courseRepo.findById(courseId).get());
         student.setCourses(courses);
         return studentRepo.save(student);
+    }
+
+    public Set<Student> getStudentsBySearch(String keyword){
+        return studentRepo.findStudentsByNameContainingIgnoreCaseOrEmailContainingIgnoreCaseOrCourses_NameContainingIgnoreCase(keyword, keyword, keyword);
     }
 }

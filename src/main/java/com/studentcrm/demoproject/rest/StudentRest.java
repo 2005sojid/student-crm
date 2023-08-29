@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -42,5 +43,10 @@ public class StudentRest {
     @PutMapping("/students/{stId}/courses/{courseId}")
     public ResponseEntity<Student> addCourseToStudent(@PathVariable Long stId, @PathVariable Long courseId){
        return ResponseEntity.ok(studentService.addCourseToStudent(stId, courseId));
+    }
+
+    @GetMapping("/students/find/{keyword}")
+    public ResponseEntity<Set<Student>> findStudentsByKeyword(@PathVariable String keyword){
+        return ResponseEntity.ok(studentService.getStudentsBySearch(keyword));
     }
 }
